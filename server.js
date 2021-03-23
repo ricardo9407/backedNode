@@ -39,5 +39,6 @@ router.put('/message', function (req, res){
     res.send('Se modificó el mensaje');
 });
 
+app.use('/app', express.static('public'));
 app.listen(3000);
 console.log('La aplicacion esta escuchando en http://localhost:3000');
