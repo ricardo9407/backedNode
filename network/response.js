@@ -1,9 +1,9 @@
 const responseMessages = require('./responseMessages');
 
-exports.success = function (req, res, status) {
+exports.success = function (req, res, message, status) {
     res.status(status).send({
-        error:'',
-        body: responseMessages(status)
+        status:responseMessages(status),
+        body: message
     });
 }
 
