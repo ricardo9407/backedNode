@@ -1,5 +1,3 @@
-'use estrict';
-
 const responseMessages = (errorCode) => {
   switch(errorCode) {
     case 200:

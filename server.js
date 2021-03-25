@@ -1,44 +1,12 @@
 const express = require('express');
-const router = express.Router();
-const response = require('./network/response');
+const router = require('./network/routes');
+//const router = require('./component/message/network');
 
 var app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(router);
-
-router.get('/message', function (req, res){
-    console.log(req.headers);
-    res.header({
-        "custom-header": "Nuestro valor personalizado",
-    });
-    console.log(req.query);
-    console.log(req.body);
-    if (req.query.error == "ok"){
-        response.error(req, res, 205, 'Es solo una simulacion de los errores');
-    }else{
-        response.success(req, res, 200);
-    }
-});
-router.post('/message', function (req, res){
-    console.log(req.query);
-    console.log(req.body);
-    if (req.query.error == "ok"){
-        response.error(req, res, 501, 'Es solo una simulacion de los errores');
-    }else{
-        response.success(req, res, 201);
-    }
-});
-router.delete('/message', function (req, res){
-    res.send('Se eliminó el mensaje');
-});
-router.patch('/message', function (req, res){
-    res.status(201).send({error:'', body: 'Actualizado Correctamente'});
-});
-router.put('/message', function (req, res){
-    res.send('Se modificó el mensaje');
-});
-
+//app.use(router);
+router(app);
 app.use('/app', express.static('public'));
 app.listen(3000);
 console.log('La aplicacion esta escuchando en http://localhost:3000');

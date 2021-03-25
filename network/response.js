@@ -1,4 +1,3 @@
-'use estrict';
 const responseMessages = require('./responseMessages');
 
 exports.success = function (req, res, status) {
