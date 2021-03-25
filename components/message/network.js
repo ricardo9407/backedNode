@@ -4,24 +4,20 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', function (req, res){
-    console.log(req.headers);
-    res.header({
-        "custom-header": "Nuestro valor personalizado",
+    controller.getMessage()
+    .then((messageList) => {
+        response.success(req, res, messageList, 200);
+    })
+    .catch(e => {
+        response.error(req, res, 500, e);
     });
-    console.log(req.query);
-    console.log(req.body);
-    if (req.query.error == "ok"){
-        response.error(req, res, 205, 'Es solo una simulacion de los errores');
-    }else{
-        response.success(req, res, 200);
-    }
 });
 router.post('/', function (req, res){
     controller.addMessage(req.body.user, req.body.message)
     .then((fullMessage)=> {
         response.success(req, res, fullMessage, 201);
     }).catch(e => {
-        response.error(req, res, 400, 'Erro en el controlador');
+        response.error(req, res, 400, e);
     });
 });
 
